@@ -2,8 +2,6 @@
 import csv
 import argparse
 
-infile = 'measurements.txt'
-
 parser = argparse.ArgumentParser(description='Read input file')
 parser.add_argument('infile', metavar='Infile', type=str, help='Csv to process')
 args = parser.parse_args()
@@ -24,7 +22,7 @@ with open(infile, 'r') as csvfile:
             print("No previous value, moving to the next step")
         else:
             diff = curr_value - prev_value
-            print("Found difference: %d" %diff)
+            print("\tFound difference: %d" %diff)
             if diff > 0:
                 result += 1
         prev_value = curr_value
