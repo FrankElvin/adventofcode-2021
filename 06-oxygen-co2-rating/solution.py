@@ -14,18 +14,6 @@ width = vars(args)['width']
 print("Infile: %s" %infile)
 print("Width: %d" %width)
 
-# read initial data array
-data = []
-with open(infile, 'r') as csvfile:
-    reader = csv.reader(csvfile, delimiter=" ")
-    for row in reader:
-        data.append(row[0])
-
-def print_data(data, header):
-    print("%s" %header)
-    for line in data:
-        print("\t", line)
-
 # one iteration of processing binary data
 def get_by_criteria(data, position, gas):
     line_counter = len(data)
@@ -78,6 +66,14 @@ def get_gas_criteria(data, gas):
             print("\tLevel %d. Going one level deeper" %counter)
             counter += 1
 
+
+
+# read initial data array
+data = []
+with open(infile, 'r') as csvfile:
+    reader = csv.reader(csvfile, delimiter=" ")
+    for row in reader:
+        data.append(row[0])
 
 o2_number = get_gas_criteria(data, "oxygen")
 co2_number = get_gas_criteria(data, "co2")
