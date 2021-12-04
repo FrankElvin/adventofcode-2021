@@ -39,25 +39,32 @@ with open(infile, 'r') as csvfile:
         boards.append(board)
 
 # DEBUG
-boards = [ boards[2] ]
-
-for board in boards:
-    print_board(board, '')
+#boards = [ boards[2] ]
+#for board in boards:
+#    print_board(board, '')
 
 # draw numbers one by one and check bingo every time
 def main_loop(drawn, boards):
-    for number in drawn:
-        print("Marking %d" %number)
-        position_to_check = mark_in_board(number, boards[0])
-        if position_to_check:
-            bingo = check_bingo_by_position(boards[0], position_to_check)
 
-        if bingo[0]:
-            print_board(boards[0], "First board with bingo!!")
-            print("\nBINGO (%s)! On %s %d (number counted from 0)" %(bingo))
-            return count_score(board, number)
+    print("First 5 numbers - for starters: ", drawn[:5])
+    for number in drawn[:5]:
+        print("Marking %d" %number)
+        for board in boards:
+            mark_in_board(number, board)
+
+    print("Here starts the BINGO game: ", drawn[5:])
+    for number in drawn[5:]:
+        print("Marking %d" %number)
+        for board in boards:
+            marked = mark_in_board(number, board)
+            if marked:
+                bingo = check_bingo_by_position(board, marked)
+
+                if bingo:
+                    print_board(board, "First board with bingo!!")
+                    print("\nBINGO (%s)! On %s %d (number counted from 0)" %(bingo))
+                    return count_score(board, number)
 
 # DEBUG
-#drawn = [20, 18 , 8,  23, 26]
 result = main_loop(drawn, boards)
 print("Result: %d" %result)

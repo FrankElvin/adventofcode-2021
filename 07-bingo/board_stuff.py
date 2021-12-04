@@ -11,7 +11,6 @@ def mark_in_board(number, board):
         for j in range(len(board[0])):
             if board[i][j].is_equal(number):
                 board[i][j].mark()
-                print("Marking line: %d; column: %d" %(i, j))
                 return (i, j)
     return None
 
@@ -32,22 +31,19 @@ def check_bingo_one(board, index, linetype):
 
 def check_bingo_by_position(board, position_to_check):
     """Check if a board contains bingo by updated position"""
-    board_size = len(board)
-    print("Checking board for bingo")
-    print_board(board, "")
 
     line_res = check_bingo_one(board, position_to_check[0], 'line')
-    print("\tChecking line %d: %s" %(position_to_check[0]+1, line_res))
+    #print("\tChecking line %d: %s" %(position_to_check[0]+1, line_res))
     if line_res:
         return line_res, 'line', position_to_check[0]
 
     column_res = check_bingo_one(board, position_to_check[1], 'column')
-    print("\tChecking column %d: %s" %(position_to_check[1]+1, column_res))
+    #print("\tChecking column %d: %s" %(position_to_check[1]+1, column_res))
     if column_res:
         return column_res, 'column', position_to_check[1]
 
-    print("No bingo for now")
-    return False, None, None
+    #print("No bingo for now")
+    return None
 
 
 def count_score(board, last_draw):
