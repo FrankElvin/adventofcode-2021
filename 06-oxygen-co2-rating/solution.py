@@ -6,13 +6,10 @@ import copy
 
 parser = argparse.ArgumentParser(description='Read input file')
 parser.add_argument('infile', metavar='Infile', type=str, help='File to process')
-parser.add_argument('width', metavar='Width', type=int, help='Width of byte string')
 
 args = parser.parse_args()
 infile = vars(args)['infile']
-width = vars(args)['width']
 print("Infile: %s" %infile)
-print("Width: %d" %width)
 
 # one iteration of processing binary data
 def get_by_criteria(data, position, gas):
