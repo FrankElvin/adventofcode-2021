@@ -45,12 +45,19 @@ for board in boards:
     print_board(board, '')
 
 # draw numbers one by one and check bingo every time
-for number in drawn:
-    print("Marking %d" %number)
-    mark_in_board(number, boards[0])
-    bingo = check_bingo_board(board)
-    if bingo[0]:
-        break
+def main_loop(drawn, boards):
+    for number in drawn:
+        print("Marking %d" %number)
+        position_to_check = mark_in_board(number, boards[0])
+        if position_to_check:
+            bingo = check_bingo_by_position(boards[0], position_to_check)
 
-print("\nBINGO (%s)! On %s %d (number counted from 0)" %(bingo))
-print("Result: %d" %(count_score(board, number)))
+        if bingo[0]:
+            print_board(boards[0], "First board with bingo!!")
+            print("\nBINGO (%s)! On %s %d (number counted from 0)" %(bingo))
+            return count_score(board, number)
+
+# DEBUG
+#drawn = [20, 18 , 8,  23, 26]
+result = main_loop(drawn, boards)
+print("Result: %d" %result)
