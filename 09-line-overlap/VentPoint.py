@@ -18,7 +18,7 @@ class VentPoint:
         if self.marks != 0:
             return "%2d" %self.marks
         else:
-            #return " ."
-            return "%2d %2d |" %(self.x, self.y)
+            return " ."
+            #return "%2d %2d |" %(self.x, self.y)
 
 

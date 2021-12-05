@@ -21,18 +21,15 @@ def read_points(coords):
         points[i] = int(points[i])
     return points
 
+# process infile
 lines = []
 with open(infile, 'r') as csvfile:
     reader = csv.reader(csvfile, delimiter=" ")
-
     for row in reader:
         line = []
         line.append(read_points(row[0]))
         line.append(read_points(row[2]))
         lines.append(line)
-
-for line in lines:
-    print(line)
 
 # filtering out non-horizontal and non-vertical lines
 straight_lines = []
@@ -41,14 +38,14 @@ for line in lines:
         straight_lines.append(line)
 lines = straight_lines
 
-print()
-for line in straight_lines:
-    print(line)
-
-diagram = init_vent_diagram(10)
-print_diagram(diagram)
-
-#for line in lines:
-#    mark_line(diagram, line)
-#
+diagram = init_vent_diagram(1000)
+#print("======== Before:")
 #print_diagram(diagram)
+
+for line in lines:
+    mark_line(diagram, line)
+
+#print("======== After:")
+#print_diagram(diagram)
+overlaps = count_overlaps(diagram)
+print("Overlaps: %d" %overlaps)
