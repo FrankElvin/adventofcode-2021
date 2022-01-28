@@ -1,6 +1,7 @@
 
 import csv
 import argparse
+import sys
 
 from step_stuff import add_to_buckets, one_step
 from count_stuff import *
@@ -14,6 +15,8 @@ infile = vars(args)['infile']
 step_count = vars(args)['step_count']
 print("Infile: %s" %infile)
 print("Steps: %s" %step_count)
+
+sys.setrecursionlimit(5000)
 
 # process infile
 template = []
@@ -54,8 +57,12 @@ for i in range(step_count):
 
 print("======================")
 
-counts = get_counts(buckets, symbols)
-print(counts)
-print("Result: %d" %(counts[1][0] - counts[0][0]))
 
-repair_polymer(buckets)
+repair_result = repair_polymer(buckets)
+print("Repair result:", repair_result)
+if (repair_result[1]):
+    print("The polymer is repaired successfully")
+    counts = get_counts(repair_result[0], symbols)
+    print(counts)
+    print("Result: %d" %(counts[1][0] - counts[0][0]))
+    
